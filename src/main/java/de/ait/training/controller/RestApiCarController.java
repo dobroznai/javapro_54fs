@@ -47,7 +47,7 @@ import java.util.List;
          * GET /api/cars/color/{color}
          * @return Если в списке отсутствует заданый цвет - возвращаем пустой список, если найден - Возвращает список всех автомобилей заданного цвета
          */
-        @Operation(summary = "Get cars by color", description = "Returns a list of cars filtered by color")
+        @Operation(summary = "Get cars by color", description = "Returns a list of cars filtered by color", responses = @ApiResponse(responseCode = "200", description = "Found cars with color"))
         @GetMapping("/color/{color}")
         public ResponseEntity<List<Car>> getCarsByColor(@PathVariable String color) {
             List<Car> filteredCars = new ArrayList<>();
@@ -61,7 +61,7 @@ import java.util.List;
 
             // логирование перед тернарным оператором
             if (filteredCars.isEmpty()) {
-                log.warn("No cars found with color: {}", color);
+                log.warn("No cars found for color: {}", color);
             } else {
                 log.info("Found {} cars with color: {}", filteredCars.size(), color);
             }
