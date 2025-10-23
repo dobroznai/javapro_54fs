@@ -22,22 +22,6 @@ public class RestApiCarController {
 
     private final CarRepository carRepository;
 
-    /**
-     * Car carOne = new Car(1, "black", "BMW x5", 25000);
-     * Car carTwo = new Car(2, "green", "Audi A4", 15000);
-     * Car carThree = new Car(3, "white", "MB A220", 18000);
-     * Car carFour = new Car(4, "red", "Ferrari", 250000);
-     * <p>
-     * List<Car> cars = new ArrayList<>();
-     * <p>
-     * public RestApiCarController() {
-     * cars.add(carOne);
-     * cars.add(carTwo);
-     * cars.add(carThree);
-     * cars.add(carFour);
-     * }
-     */
-
     public RestApiCarController(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
@@ -143,7 +127,7 @@ public class RestApiCarController {
             log.error("Max price must be greater than min");
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
         }
-        List<Car> filteredCars = carRepository.findCarByPriceBetweenIgnoreCase(min, max);
+        List<Car> filteredCars = carRepository.findCarByPriceBetween(min, max);
         if (filteredCars.isEmpty()) {
             log.info("No cars found for price between {} and {}", min, max);
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
@@ -154,7 +138,7 @@ public class RestApiCarController {
 
     @GetMapping("/price/unter/{max}")
     public ResponseEntity<List<Car>> getCarsByPriceLessThanEqual(@PathVariable Double max) {
-        List<Car> filteredCars = carRepository.findCarByPriceLessThanEqualIgnoreCase(max);
+        List<Car> filteredCars = carRepository.findCarByPriceLessThanEqual(max);
         if (filteredCars.isEmpty()) {
             log.info("No cars found for price less than {}", max);
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
@@ -165,7 +149,7 @@ public class RestApiCarController {
 
     @GetMapping("/price/over/{min}")
     public ResponseEntity<List<Car>> getCarsByPriceGreaterThan(@PathVariable Double min) {
-        List<Car> filteredCars = carRepository.findCarByPriceGreaterThanEqualIgnoreCase(min);
+        List<Car> filteredCars = carRepository.findCarByPriceGreaterThanEqual(min);
         if (filteredCars.isEmpty()) {
             log.info("No cars found for price greater than {}", min);
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
