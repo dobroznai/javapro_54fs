@@ -41,7 +41,6 @@ public class RestApiCarControllerIT {
     void testPriceBetween10000And30000() {
         ResponseEntity<Car[]> response = restTemplate.getForEntity(url("/api/cars/price/between/10000/30000"),
                 Car[].class);
-        //assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Car> cars = Arrays.asList(response.getBody());
         assertThat(cars.size()).isEqualTo(3);

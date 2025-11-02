@@ -8,7 +8,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +148,7 @@ public class RestApiCarController {
      * @return Если в заданном диапазоне цены автомобиль отсутствует - возвращаем пустой список filteredCars, если найден - возвращаем список всех автомобилей ниже цены указанной в max
      */
     @Operation(summary = "Get cars by price less than equal max", description = "Returns a list of cars filtered by price less than equal max", responses = @ApiResponse(responseCode = "200", description = "Found cars with price less than equal max"))
-    @GetMapping("/price/unter/{max}")
+    @GetMapping("/price/under/{max}")
     public ResponseEntity<List<Car>> getCarsByPriceLessThanEqual(@PathVariable Double max) {
         List<Car> filteredCars = carRepository.findCarByPriceLessThanEqual(max);
         if (filteredCars.isEmpty()) {

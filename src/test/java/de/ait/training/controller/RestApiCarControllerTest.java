@@ -5,7 +5,6 @@ import de.ait.training.repository.CarRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -22,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = RestApiCarController.class)
 class RestApiCarControllerTest {
-
+    // возможность отправлять на http запросы
     @Autowired
     private MockMvc mockMvc;
 
@@ -37,13 +36,12 @@ class RestApiCarControllerTest {
                         new Car("green", "Audi A4", 15000),
                         new Car("white", "MB A220", 18000)));
 
-        mockMvc.perform(get("/api/cars/price/between/{min}/{max}", 10000, 30000)
-                ).andExpect(status().isOk())
+        mockMvc.perform(get("/api/cars/price/between/{min}/{max}", 10000, 30000))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3))
                 .andExpect(jsonPath("$[?(@.model == 'BMW x5')]").exists())
                 .andExpect(jsonPath("$[?(@.model == 'Audi A4')]").exists())
                 .andExpect(jsonPath("$[?(@.model == 'MB A220')]").exists());
-
     }
 
     @Test
@@ -65,6 +63,4 @@ class RestApiCarControllerTest {
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[?(@.model == 'Audi A4')]").exists());
     }
-
-
 }
