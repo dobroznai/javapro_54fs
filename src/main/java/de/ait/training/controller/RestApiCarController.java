@@ -39,9 +39,19 @@ public class RestApiCarController {
      *
      * @return список всех автомобилей
      */
+    @Operation(summary = "Get cars",
+            description = "Get all cars from database",
+            responses = {@ApiResponse(responseCode = "200", description = "Found"),
+                    @ApiResponse(responseCode = "404", description = "Not Found")})
     @GetMapping
-    Iterable<Car> getCars() {
-        return carRepository.findAll();
+    ResponseEntity<Iterable<Car>> getCars() {
+        List<Car> filteredCars = carRepository.findAll();
+        if (filteredCars.isEmpty()) {
+            log.info("Empty DB, 0 cars found");
+        } else {
+            log.info("Found {} cars in DB", filteredCars.size());
+        }
+        return new ResponseEntity<>(filteredCars, HttpStatus.OK);
     }
 
     /**
