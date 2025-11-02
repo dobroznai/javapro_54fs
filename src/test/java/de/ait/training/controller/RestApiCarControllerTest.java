@@ -4,9 +4,10 @@ import de.ait.training.model.Car;
 import de.ait.training.repository.CarRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -29,6 +30,7 @@ class RestApiCarControllerTest {
     private CarRepository carRepository;
 
     @Test
+    @DisplayName("price between 10000 and 30000, 3 cars found")
     void testFindCarsPriceBetweenSuccess() throws Exception {
         given(carRepository.findCarByPriceBetween(10000.0, 30000.0))
                 .willReturn(List.of(new Car("black", "BMW x5", 25000),
@@ -53,23 +55,16 @@ class RestApiCarControllerTest {
     }
 
     @Test
-    @DisplayName("price unter then 16000, 1 car found, status OK")
+    @DisplayName("price under then 16000, 1 car found, status OK")
     void testFindCarLessThanEqualSuccess() throws Exception {
         given(carRepository.findCarByPriceLessThanEqual(16000.0))
                 .willReturn(List.of(new Car("green", "Audi A4", 15000)));
 
-        mockMvc.perform(get("/api/cars/price/unter/{max}", 16000))
+        mockMvc.perform(get("/api/cars/price/under/{max}", 16000))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[?(@.model == 'Audi A4')]").exists());
     }
+
+
 }
-
-
-
-
-
-
-
-
-

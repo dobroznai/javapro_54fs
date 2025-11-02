@@ -17,14 +17,16 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+//Запускает приложение целиком на случайном порту
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("test") // Использует тестовый профиль и базу H2
 public class RestApiCarControllerIT {
 
 
     @Autowired
-    TestRestTemplate restTemplate;
-    @LocalServerPort
+    TestRestTemplate restTemplate; //Упрощённый HTTP-клиент, встроенный в Spring Boot
+
+    @LocalServerPort //Подставляет фактический порт, на котором работает встроенный сервер
     private int port;
 
     private String url(String path) {
@@ -32,9 +34,11 @@ public class RestApiCarControllerIT {
     }
 
     @Test
+    // Добавляет читаемое описание теста в отчётах
     @DisplayName("price between 10000 and 30000, 3 cars were found, status OK")
+    //Выполняет SQL-скрипты до и после теста (очистка и наполнение базы)
     @Sql(scripts = {"classpath:sql/clear.sql", "classpath:sql/seed_cars.sql"})
-    void testPriceBetween10000And30000() throws Exception {
+    void testPriceBetween10000And30000() {
         ResponseEntity<Car[]> response = restTemplate.getForEntity(url("/api/cars/price/between/10000/30000"),
                 Car[].class);
         //assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
