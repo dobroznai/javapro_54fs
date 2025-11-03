@@ -25,13 +25,13 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // перед каждым сохранением в БД проверяет на null
-    @Column(nullable = false)
+    @Column(nullable = false, name = "color")
     private String color;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "model")
     private String model;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "price")
     private double price;
 
     public Car(String color, String model, double price) {
