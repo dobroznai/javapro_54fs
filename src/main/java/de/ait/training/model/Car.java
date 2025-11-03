@@ -10,6 +10,8 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Calendar;
+
 // lombok
 // Equivalent to @Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode.
 @Data
@@ -33,6 +35,9 @@ public class Car {
 
     @Column(nullable = false, name = "price")
     private double price;
+
+    @Column(nullable = false)
+    private int year;
 
     public Car(String color, String model, double price) {
         this.color = color;
