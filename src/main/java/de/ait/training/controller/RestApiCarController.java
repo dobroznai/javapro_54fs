@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -62,12 +63,15 @@ public class RestApiCarController {
      */
     @Operation(summary = "Create car", description = "Create a new car", responses = {@ApiResponse(responseCode = "200", description = "Created")})
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     Car postCar(@RequestBody Car car) {
-        if (car.getId() <= 0) {
-            log.error("Car id must be greater than zero");
-            Car errorCar = new Car("000", "000", 9999);
-            return errorCar;
-        }
+        // обнуляем ID
+        car.setId(null);
+//        if (car.getId() <= 0) {
+//            log.error("Car id must be greater than zero");
+//            Car errorCar = new Car("000", "000", 9999);
+//            return errorCar;
+//        }
         carRepository.save(car);
         log.info("Car posted successfully");
         return car;
