@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+}
+
+.email-container {
+    width: 600px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 30px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+}
+
+.header {
+    background-color: #004aad;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.header h1 {
+    color: #ffffff;
+    margin: 0;
+}
+
+.content {
+    padding: 30px;
+}
+
+.content h2 {
+    color: #004aad;
+}
+
+.promo {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.promo span {
+    display: inline-block;
+    background-color: #004aad;
+    color: #ffffff;
+    padding: 12px 25px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 6px;
+    letter-spacing: 1px;
+}
+
+.footer {
+    background-color: #f1f3f8;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+}

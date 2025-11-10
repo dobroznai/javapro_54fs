@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AIT Car Service</title>
+    <style th:utext="${styles}"></style>
+</head>
+<body>
+<table class="email-container" role="presentation">
+    <tr>
+        <td class="header">
+            <h1>AIT Car Service</h1>
+        </td>
+    </tr>
+    <tr>
+        <td class="content">
+            <h2 th:text="${title}">Service Reminder</h2>
+            <p>Hello <b th:text="${userName}">User</b>,</p>
+            <p>
+                It's time for your next car maintenance!<br>
+                Use the promo code below:
+            </p>
+            <p class="promo">
+                <span th:text="${promoCode}">AIT2025Promo</span>
+            </p>
+            <p>— The AIT Car Service Team —</p>
+        </td>
+    </tr>
+    <tr>
+        <td class="footer">
+            © 2025 AIT Car Service. All rights reserved.
+        </td>
+    </tr>
+</table>
+</body>
+</html>
