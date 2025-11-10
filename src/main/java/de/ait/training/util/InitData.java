@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 // При старте приложения происходит инициализация приложения с заполненными данными в базу данных
-@Configuration
+//@Configuration
 public class InitData {
     // выполняет run один раз за всю жизнь приложения после того как все контакты с базы данных подключены, одним щелчком вписать в БД тестовые данные
-    @Bean
+//    @Bean
     CommandLineRunner init(CarRepository carRepository) {
         return args -> {
             // проверка на дублирование данных

@@ -2,6 +2,7 @@ package de.ait.training.controller;
 
 import de.ait.training.model.Car;
 import de.ait.training.repository.CarRepository;
+import de.ait.training.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +32,20 @@ public class RestApiCarController {
 
     private final CarRepository carRepository;
 
-    public RestApiCarController(CarRepository carRepository) {
+
+    private final CarService service;
+
+    public RestApiCarController(CarRepository carRepository, CarService service) {
         this.carRepository = carRepository;
+        this.service = service;
     }
 
+    @PostMapping("/{id}/add-image")
+    public void attachImage(@PathVariable Long id, @RequestParam MultipartFile file) {
+        service.attachImage(id, file);
+        log.info("Image uploaded for car {}", id);
+
+    }
 
     /**
      * Возвращает список всех автомобилей

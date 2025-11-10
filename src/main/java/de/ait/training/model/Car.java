@@ -22,6 +22,7 @@ import java.util.Calendar;
 
 
 public class Car {
+
     // уникальный идентификатор для каждой транзакции
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +30,16 @@ public class Car {
     // перед каждым сохранением в БД проверяет на null
     @Column(nullable = false, name = "color")
     private String color;
-
     @Column(nullable = false, name = "model")
     private String model;
-
-    @Column(nullable = false, name = "price")
+    @Column(name = "price")
     private double price;
+    @Column(nullable = false, name = "year")
+    private int year;
+    @Column(name = "engineType")
+    private String engineType;
+    @Column(name = "image_url")
+    private String imageUrl;
 
     public Car(String color, String model, double price) {
         this.color = color;
