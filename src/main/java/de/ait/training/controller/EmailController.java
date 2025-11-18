@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("api/email")
 @Slf4j
@@ -31,7 +32,7 @@ public class EmailController {
         emailService.sendTemplateEmail(emailTo, "Car service time", "email/CarService",
                 map);
 
-        return ResponseEntity.ok(STR."Email sent to \{emailTo}");
+        return ResponseEntity.ok("Email sent to, " + emailTo);
     }
 
 
